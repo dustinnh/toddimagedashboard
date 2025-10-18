@@ -4,6 +4,8 @@
 
 A comprehensive web application that helps educators create high-quality visual materials for students with special needs using OpenAI's image generation models (GPT Image 1, DALL-E 3, and DALL-E 2).
 
+![Todd Image Dashboard Screenshot](screenshots/main.png)
+
 ## 🌟 Overview
 
 Todd Image Dashboard is designed specifically for teachers working with children with special needs. It provides an intuitive interface for generating educational visual aids, social stories, emotion cards, visual schedules, and more using cutting-edge AI technology.
@@ -368,6 +370,48 @@ Create counting cards:
 - Use "Math Number Visual" preset
 - Generate cards for numbers 1-20
 - Use for counting and number recognition
+
+## 📸 Screenshots
+
+### Welcome Wizard
+The interactive onboarding guide helps new users get started quickly.
+
+![Welcome Wizard](screenshots/Screenshot%202025-10-18%20at%203.39.52%20PM.png)
+
+### Main Dashboard
+Clean, intuitive interface with generation controls and live gallery.
+
+![Main Interface](screenshots/Screenshot%202025-10-18%20at%203.39.59%20PM.png)
+
+### Preset Manager
+Browse and load from 32 educational presets across 15 categories.
+
+![Preset Manager](screenshots/Screenshot%202025-10-18%20at%203.40.04%20PM.png)
+
+### Model Information
+Detailed comparison of AI models with pricing and features.
+
+![Model Info](screenshots/Screenshot%202025-10-18%20at%203.40.09%20PM.png)
+
+### Tips Panel
+26 helpful tips that auto-rotate with practical examples.
+
+![Tips Panel](screenshots/Screenshot%202025-10-18%20at%203.40.12%20PM.png)
+
+### Settings
+Easy API key management and usage tracking.
+
+![Settings](screenshots/Screenshot%202025-10-18%20at%203.40.16%20PM.png)
+
+### Generated Gallery
+View all your created images with metadata and download options.
+
+![Image Gallery](screenshots/Screenshot%202025-10-18%20at%203.40.19%20PM.png)
+
+### Image Generation
+Real-time generation with progress tracking and cost estimates.
+
+![Generation Progress](screenshots/Screenshot%202025-10-18%20at%203.40.44%20PM.png)
 
 ## 💰 Pricing Reference
 
