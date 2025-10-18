@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todd Image Dashboard - Installation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin: 8px 0;
+        }
+
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .toc a:hover {
+            color: #764ba2;
+            padding-left: 5px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5rem;
+            margin: 25px 0 15px 0;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 1.2rem;
+            margin: 20px 0 10px 0;
+        }
+
+        p, li {
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+
+        .prerequisites {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .prerequisites h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+
+        .prerequisites ul {
+            margin-left: 20px;
+        }
+
+        .step {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+        }
+
+        .step h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+
+        .platform-tabs {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .platform-tab {
+            padding: 10px 20px;
+            background: #e9ecef;
+            border: none;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .platform-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .platform-content {
+            display: none;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 0 8px 8px 8px;
+        }
+
+        .platform-content.active {
+            display: block;
+        }
+
+        code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-block code {
+            background: none;
+            padding: 0;
+        }
+
+        .note {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .note strong {
+            color: #0c5460;
+        }
+
+        .warning {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .warning strong {
+            color: #721c24;
+        }
+
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .success strong {
+            color: #155724;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .troubleshooting {
+            background: #fff8e1;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .troubleshooting h3 {
+            color: #ff6f00;
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .platform-tabs {
+                flex-direction: column;
+            }
+
+            .platform-tab {
+                border-radius: 8px;
+            }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .back-to-top:hover {
+            background: #764ba2;
+            transform: translateY(-5px);
+        }
+
+        .icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 Todd Image Dashboard</h1>
+            <p>Easy Installation Guide for Teachers</p>
+        </div>
+
+        <div class="content">
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h2>📋 Quick Navigation</h2>
+                <ul>
+                    <li><a href="#quickinstall">🚀 Quick Install (Windows - Automated)</a></li>
+                    <li><a href="#prerequisites">Prerequisites</a></li>
+                    <li><a href="#step1">Step 1: Download the Project</a></li>
+                    <li><a href="#step2">Step 2: Install Dependencies</a></li>
+                    <li><a href="#step3">Step 3: Configure API Key (Optional)</a></li>
+                    <li><a href="#step4">Step 4: Create Folders</a></li>
+                    <li><a href="#step5">Step 5: Start the Application</a></li>
+                    <li><a href="#step6">Step 6: Open Dashboard</a></li>
+                    <li><a href="#step7">Step 7: First Time Setup</a></li>
+                    <li><a href="#troubleshooting">Troubleshooting</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick Install -->
+            <div class="section" id="quickinstall">
+                <h2><span class="icon">🚀</span>Quick Install for Windows (Recommended!)</h2>
+
+                <div class="success">
+                    <strong>✨ For Windows users - we made it super easy!</strong> Our automated PowerShell script does all the work for you.
+                </div>
+
+                <h3>One-Click Installation</h3>
+                <p>Follow these simple steps:</p>
+
+                <ol style="font-size: 1.2rem; line-height: 2;">
+                    <li><strong>Download or extract</strong> the project folder to your computer</li>
+                    <li><strong>Find the file</strong> named <code>install.ps1</code> in the project folder</li>
+                    <li><strong>Right-click</strong> on <code>install.ps1</code></li>
+                    <li><strong>Select</strong> "Run with PowerShell"</li>
+                    <li><strong>Follow the prompts</strong> on screen</li>
+                </ol>
+
+                <div class="note">
+                    <strong>💡 What the script does:</strong>
+                    <ul>
+                        <li>✓ Checks if you have Node.js installed (installs it if you don't)</li>
+                        <li>✓ Creates all necessary folders</li>
+                        <li>✓ Downloads and installs all required files</li>
+                        <li>✓ Creates a <code>start.ps1</code> file for easy launching</li>
+                    </ul>
+                </div>
+
+                <h3>After Installation</h3>
+                <p>Once the installation is complete, you'll have a <code>start.ps1</code> file in your folder.</p>
+
+                <div class="success">
+                    <strong>🎉 To use the dashboard:</strong><br>
+                    Just double-click <code>start.ps1</code> anytime you want to use the dashboard!
+                </div>
+
+                <h3>Creating a Desktop Shortcut (Recommended)</h3>
+                <p>For even easier access:</p>
+                <ol>
+                    <li>Right-click the <code>start.ps1</code> file</li>
+                    <li>Select <strong>"Create shortcut"</strong></li>
+                    <li>Drag the shortcut to your Desktop</li>
+                    <li>Now you can launch the dashboard from your Desktop anytime!</li>
+                </ol>
+
+                <div class="warning">
+                    <strong>⚠️ If you see a security warning:</strong><br>
+                    Windows might ask if you want to allow the script to run. Click "Yes" or "Allow" - the script is safe and only installs the dashboard.
+                </div>
+
+                <hr style="margin: 40px 0; border: none; border-top: 2px solid #e9ecef;">
+
+                <h3>Mac/Linux Users or Prefer Manual Installation?</h3>
+                <p>No problem! Continue with the manual installation steps below.</p>
+            </div>
+
+            <!-- Prerequisites -->
+            <div class="section prerequisites" id="prerequisites">
+                <h3><span class="icon">⚙️</span>What You Need Before Starting</h3>
+                <p>Before installing the dashboard, please make sure you have:</p>
+                <ul class="checklist">
+                    <li><strong>Node.js</strong> (version 16 or higher) - <a href="https://nodejs.org/" target="_blank">Download here</a></li>
+                    <li><strong>npm</strong> (comes automatically with Node.js)</li>
+                    <li><strong>OpenAI API Key</strong> - <a href="https://platform.openai.com/api-keys" target="_blank">Get one here</a></li>
+                </ul>
+                <div class="note">
+                    <strong>💡 Tip:</strong> Download the LTS (Long Term Support) version of Node.js for the most stable experience.
+                </div>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="step" id="step1">
+                <h3><span class="icon">📦</span>Step 1: Download the Project</h3>
+
+                <div class="platform-tabs">
+                    <button class="platform-tab active" onclick="showPlatform('step1', 'windows')">🪟 Windows</button>
+                    <button class="platform-tab" onclick="showPlatform('step1', 'mac')">🍎 macOS / Linux</button>
+                </div>
+
+                <div id="step1-windows" class="platform-content active">
+                    <h4>If you have a ZIP file:</h4>
+                    <ol>
+                        <li>Right-click the ZIP file and select <strong>"Extract All"</strong></li>
+                        <li>Choose where to extract (e.g., Desktop)</li>
+                        <li>Open <strong>Command Prompt</strong> or <strong>PowerShell</strong></li>
+                        <li>Navigate to the folder:</li>
+                    </ol>
+                    <div class="code-block">
+                        <code>cd C:\Users\YourUsername\Desktop\todd\image</code>
+                    </div>
+                    <div class="note">
+                        <strong>💡 Tip:</strong> Replace "YourUsername" with your actual Windows username.
+                    </div>
+
+                    <h4>If you're using Git:</h4>
+                    <div class="code-block">
+                        <code>git clone &lt;repository-url&gt;<br>cd todd\image</code>
+                    </div>
+                </div>
+
+                <div id="step1-mac" class="platform-content">
+                    <h4>If you have a ZIP file:</h4>
+                    <ol>
+                        <li>Double-click the ZIP file to extract it</li>
+                        <li>Open <strong>Terminal</strong> (Applications → Utilities → Terminal)</li>
+                        <li>Navigate to the folder:</li>
+                    </ol>
+                    <div class="code-block">
+                        <code>cd ~/Desktop/todd/image</code>
+                    </div>
+
+                    <h4>If you're using Git:</h4>
+                    <div class="code-block">
+                        <code>git clone &lt;repository-url&gt;<br>cd todd/image</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step" id="step2">
+                <h3><span class="icon">⬇️</span>Step 2: Install Required Files</h3>
+                <p>This step downloads all the necessary files for the application to work.</p>
+
+                <div class="platform-tabs">
+                    <button class="platform-tab active" onclick="showPlatform('step2', 'windows')">🪟 Windows</button>
+                    <button class="platform-tab" onclick="showPlatform('step2', 'mac')">🍎 macOS / Linux</button>
+                </div>
+
+                <div id="step2-windows" class="platform-content active">
+                    <p>Copy and paste these commands one at a time:</p>
+                    <div class="code-block">
+                        <code>npm install</code>
+                    </div>
+                    <div class="code-block">
+                        <code>cd server<br>npm install<br>cd ..</code>
+                    </div>
+                    <div class="code-block">
+                        <code>cd client<br>npm install<br>cd ..</code>
+                    </div>
+                    <div class="note">
+                        <strong>⏱️ This may take 2-5 minutes.</strong> You'll see a progress bar and downloading messages.
+                    </div>
+                </div>
+
+                <div id="step2-mac" class="platform-content">
+                    <p>Copy and paste these commands one at a time:</p>
+                    <div class="code-block">
+                        <code>npm install</code>
+                    </div>
+                    <div class="code-block">
+                        <code>cd server<br>npm install<br>cd ..</code>
+                    </div>
+                    <div class="code-block">
+                        <code>cd client<br>npm install<br>cd ..</code>
+                    </div>
+                    <div class="note">
+                        <strong>⏱️ This may take 2-5 minutes.</strong> You'll see a progress bar and downloading messages.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step" id="step3">
+                <h3><span class="icon">🔑</span>Step 3: Configure API Key (Optional)</h3>
+                <p>You can add your OpenAI API key now, or do it later through the dashboard settings.</p>
+
+                <div class="note">
+                    <strong>💡 Recommended for Beginners:</strong> Skip this step and add your API key through the dashboard after starting it. It's easier!
+                </div>
+
+                <div class="platform-tabs">
+                    <button class="platform-tab active" onclick="showPlatform('step3', 'windows')">🪟 Windows</button>
+                    <button class="platform-tab" onclick="showPlatform('step3', 'mac')">🍎 macOS / Linux</button>
+                </div>
+
+                <div id="step3-windows" class="platform-content active">
+                    <h4>Option 1: Using Notepad (Easiest)</h4>
+                    <ol>
+                        <li>Type this command:</li>
+                    </ol>
+                    <div class="code-block">
+                        <code>notepad .env</code>
+                    </div>
+                    <ol start="2">
+                        <li>When asked "Cannot find the .env file. Do you want to create a new file?", click <strong>Yes</strong></li>
+                        <li>Type the following (replace with your actual API key):</li>
+                    </ol>
+                    <div class="code-block">
+                        <code>OPENAI_API_KEY=sk-your-api-key-here<br>PORT=3000</code>
+                    </div>
+                    <ol start="4">
+                        <li>Save the file (File → Save)</li>
+                        <li>Close Notepad</li>
+                    </ol>
+
+                    <h4>Option 2: Using Command Prompt</h4>
+                    <div class="code-block">
+                        <code>echo. > .env</code>
+                    </div>
+                    <p>Then edit with Notepad as shown above.</p>
+                </div>
+
+                <div id="step3-mac" class="platform-content">
+                    <p>Create the configuration file:</p>
+                    <div class="code-block">
+                        <code>touch .env</code>
+                    </div>
+                    <p>Open it with a text editor:</p>
+                    <div class="code-block">
+                        <code>nano .env</code>
+                    </div>
+                    <p>Add these lines (replace with your actual API key):</p>
+                    <div class="code-block">
+                        <code>OPENAI_API_KEY=sk-your-api-key-here<br>PORT=3000</code>
+                    </div>
+                    <p>Press <kbd>Control + X</kbd>, then <kbd>Y</kbd>, then <kbd>Enter</kbd> to save.</p>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step" id="step4">
+                <h3><span class="icon">📁</span>Step 4: Create Required Folders</h3>
+                <p>The application needs some folders to store generated images and temporary files.</p>
+
+                <div class="platform-tabs">
+                    <button class="platform-tab active" onclick="showPlatform('step4', 'windows')">🪟 Windows</button>
+                    <button class="platform-tab" onclick="showPlatform('step4', 'mac')">🍎 macOS / Linux</button>
+                </div>
+
+                <div id="step4-windows" class="platform-content active">
+                    <p>Copy and paste these commands:</p>
+                    <div class="code-block">
+                        <code>mkdir Images<br>mkdir data<br>mkdir uploads</code>
+                    </div>
+                    <div class="note">
+                        <strong>✓</strong> If you see "A subdirectory or file already exists", that's okay! It means the folder is already there.
+                    </div>
+                </div>
+
+                <div id="step4-mac" class="platform-content">
+                    <p>Copy and paste these commands:</p>
+                    <div class="code-block">
+                        <code>mkdir Images<br>mkdir -p data<br>mkdir -p uploads</code>
+                    </div>
+                    <div class="note">
+                        <strong>✓</strong> The <code>-p</code> flag means "create if it doesn't exist, skip if it does."
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step" id="step5">
+                <h3><span class="icon">🚀</span>Step 5: Start the Application</h3>
+                <p>Now let's start the dashboard!</p>
+
+                <div class="code-block">
+                    <code>npm start</code>
+                </div>
+
+                <div class="success">
+                    <strong>✓ Success!</strong> You should see output similar to this:
+                </div>
+
+                <div class="code-block">
+                    <code>✓ Todd Image Dashboard Server Started<br>✓ Server running on http://localhost:3000<br>✓ API Key configured: Yes/No<br><br>Ready to generate images! 🎨<br><br>VITE v5.4.20 ready in 118 ms<br>➜  Local:   http://localhost:5173/</code>
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ Keep this window open!</strong> Don't close the Command Prompt/Terminal window while using the dashboard.
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="step" id="step6">
+                <h3><span class="icon">🌐</span>Step 6: Open the Dashboard</h3>
+                <p>Open your favorite web browser and go to:</p>
+
+                <div class="code-block">
+                    <code>http://localhost:5173</code>
+                </div>
+
+                <p style="text-align: center; margin: 20px 0;">
+                    <a href="http://localhost:5173" target="_blank" class="btn">🚀 Open Dashboard Now</a>
+                </p>
+
+                <div class="note">
+                    <strong>💡 Tip:</strong> Bookmark this page in your browser for easy access later!
+                </div>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="step" id="step7">
+                <h3><span class="icon">🎯</span>Step 7: First Time Setup</h3>
+                <p>When you first open the dashboard, a <strong>Welcome Wizard</strong> will guide you through:</p>
+
+                <ol>
+                    <li><strong>Welcome & Features</strong> - Learn what the dashboard can do</li>
+                    <li><strong>API Key Setup</strong> - How to get and add your OpenAI API key</li>
+                    <li><strong>Interface Tour</strong> - Understand the control panel and gallery</li>
+                    <li><strong>Using Presets</strong> - Learn about ready-made templates</li>
+                    <li><strong>Prompt Writing</strong> - Tips for creating effective prompts</li>
+                    <li><strong>Ready to Start</strong> - Final checklist</li>
+                </ol>
+
+                <div class="success">
+                    <strong>🎉 Congratulations!</strong> You're now ready to create amazing educational images!
+                </div>
+
+                <h4>If you need to add your API key:</h4>
+                <ol>
+                    <li>Click the <strong>⚙️ Settings</strong> button in the top right</li>
+                    <li>Enter your OpenAI API key (starts with <code>sk-</code>)</li>
+                    <li>Click <strong>Save Settings</strong></li>
+                </ol>
+            </div>
+
+            <!-- Troubleshooting -->
+            <div class="section troubleshooting" id="troubleshooting">
+                <h2><span class="icon">🔧</span>Troubleshooting Common Issues</h2>
+
+                <h3>Problem: "No API key configured" message</h3>
+                <p><strong>Solution:</strong></p>
+                <ol>
+                    <li>Click the ⚙️ Settings button</li>
+                    <li>Enter your OpenAI API key (must start with <code>sk-</code>)</li>
+                    <li>Click Save Settings</li>
+                    <li>Your key is valid if it starts with <code>sk-</code> and is about 50 characters long</li>
+                </ol>
+
+                <h3>Problem: Port 3000 or 5173 is already in use</h3>
+                <p><strong>Solution (Windows):</strong></p>
+                <div class="code-block">
+                    <code>netstat -ano | findstr :3000<br>taskkill /PID &lt;PID&gt; /F</code>
+                </div>
+                <p><strong>Solution (Mac/Linux):</strong></p>
+                <div class="code-block">
+                    <code>lsof -i :3000<br>kill -9 &lt;PID&gt;</code>
+                </div>
+
+                <h3>Problem: "Cannot find module" errors</h3>
+                <p><strong>Solution:</strong> Go back to <a href="#step2">Step 2</a> and reinstall dependencies.</p>
+
+                <h3>Problem: Images aren't generating</h3>
+                <p><strong>Check these:</strong></p>
+                <ul class="checklist">
+                    <li>Is your API key entered correctly?</li>
+                    <li>Does your OpenAI account have credits?</li>
+                    <li>Is the server still running? (check the Command Prompt/Terminal)</li>
+                    <li>Check the browser console (press F12) for error messages</li>
+                </ul>
+
+                <h3>Windows Only: PowerShell Script Execution Error</h3>
+                <p><strong>Solution:</strong></p>
+                <ol>
+                    <li>Open PowerShell as Administrator (right-click → Run as administrator)</li>
+                    <li>Run this command:</li>
+                </ol>
+                <div class="code-block">
+                    <code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code>
+                </div>
+                <ol start="3">
+                    <li>Type <code>Y</code> and press Enter</li>
+                    <li>Close PowerShell and try again</li>
+                </ol>
+
+                <h3>Windows Only: Firewall Warning</h3>
+                <p><strong>Solution:</strong> When Windows Firewall asks if you want to allow Node.js network access, click <strong>"Allow access"</strong>.</p>
+
+                <div class="warning">
+                    <strong>Still having problems?</strong> Press F12 in your browser to open Developer Tools and look for red error messages. Take a screenshot and ask for help!
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="section">
+                <h2><span class="icon">✨</span>What to Do Next</h2>
+                <p>Now that your dashboard is installed, here's what to explore:</p>
+                <ul class="checklist">
+                    <li>Complete the Welcome Wizard to learn the basics</li>
+                    <li>Browse the 32 pre-made educational presets</li>
+                    <li>Generate your first image using a preset</li>
+                    <li>Read the helpful tips in the Tips Panel</li>
+                    <li>Save your favorite prompts as custom presets</li>
+                    <li>Explore different AI models (GPT Image 1, DALL-E 3, DALL-E 2)</li>
+                </ul>
+
+                <div class="success">
+                    <strong>🎨 Happy Creating!</strong> Use this tool to make amazing visual materials for your students!
+                </div>
+            </div>
+
+            <!-- Help Section -->
+            <div class="section">
+                <h2><span class="icon">💬</span>Need More Help?</h2>
+                <p>If you're stuck or have questions:</p>
+                <ol>
+                    <li>Check the <strong>Welcome Wizard</strong> in the dashboard (click "Quick Start")</li>
+                    <li>Look at the <strong>Tips Panel</strong> inside the application</li>
+                    <li>Review the troubleshooting section above</li>
+                    <li>Ask a tech-savvy colleague or friend</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top">↑</a>
+
+    <script>
+        function showPlatform(step, platform) {
+            // Hide all content for this step
+            const contents = document.querySelectorAll(`[id^="${step}-"]`);
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Hide all tabs for this step
+            const tabs = document.querySelectorAll(`#${step} .platform-tab`);
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected content
+            document.getElementById(`${step}-${platform}`).classList.add('active');
+
+            // Highlight selected tab
+            event.target.classList.add('active');
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Show/hide back to top button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

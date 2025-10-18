@@ -1,0 +1,35 @@
+{
+  "name": "todd-image-dashboard",
+  "version": "1.0.0",
+  "description": "OpenAI Image Generation Dashboard for Educational Content",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server/server.js",
+    "server:dev": "nodemon server/server.js",
+    "client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "install-all": "npm install && cd client && npm install"
+  },
+  "keywords": [
+    "openai",
+    "image-generation",
+    "education",
+    "dall-e"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "axios-retry": "^4.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "form-data": "^4.0.4",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.2"
+  }
+}
