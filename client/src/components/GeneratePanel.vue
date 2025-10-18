@@ -58,6 +58,65 @@
       </div>
     </div>
 
+    <!-- Category Selection -->
+    <div class="form-group">
+      <label for="category">Category (Optional)</label>
+      <select id="category" v-model="selectedCategory">
+        <option value="">-- None --</option>
+        <option value="Visual Schedule">Visual Schedule</option>
+        <option value="Emotion Cards">Emotion Cards</option>
+        <option value="Social Stories">Social Stories</option>
+        <option value="Educational">Educational</option>
+        <option value="Science">Science</option>
+        <option value="Math">Math</option>
+        <option value="Reading & Literacy">Reading & Literacy</option>
+        <option value="Rewards & Motivation">Rewards & Motivation</option>
+        <option value="Calming & Coping">Calming & Coping</option>
+        <option value="Life Skills">Life Skills</option>
+        <option value="Safety & Rules">Safety & Rules</option>
+        <option value="Calendar & Weather">Calendar & Weather</option>
+        <option value="Sensory Activities">Sensory Activities</option>
+        <option value="Choice Boards">Choice Boards</option>
+        <option value="Character & People">Character & People</option>
+        <option value="Classroom Decor">Classroom Decor</option>
+        <option value="Children's Book - Characters">Children's Book - Characters</option>
+        <option value="Children's Book - Scenes">Children's Book - Scenes</option>
+        <option value="Children's Book - Styles">Children's Book - Styles</option>
+      </select>
+      <span class="form-hint">Choose a category to help guide the style</span>
+    </div>
+
+    <!-- Style Selection -->
+    <div class="form-group">
+      <label for="art-style">Art Style (Optional)</label>
+      <select id="art-style" v-model="selectedStyle">
+        <option value="">-- None --</option>
+        <optgroup label="Children's Book Styles">
+          <option value="soft watercolor style, gentle colors, traditional storybook feel">Watercolor (Classic)</option>
+          <option value="modern digital cartoon, bold outlines, vibrant colors">Digital Cartoon (Modern)</option>
+          <option value="whimsical, magical style, fantastical details, enchanting">Whimsical/Fantasy</option>
+          <option value="charming hand-drawn sketch, pencil-like texture, warm feel">Hand-Drawn Sketch</option>
+          <option value="clean minimalist, simple shapes, limited colors, modern">Minimalist/Modern</option>
+          <option value="classic vintage storybook, nostalgic colors, timeless">Vintage Storybook</option>
+          <option value="textured collage-style, layered paper effect, artistic">Collage/Textured</option>
+          <option value="semi-realistic, detailed but soft, gentle realism">Realistic Kid-Friendly</option>
+        </optgroup>
+        <optgroup label="Educational Styles">
+          <option value="simple, clear illustration, easy to understand, bright colors">Simple Educational</option>
+          <option value="icon style, clean and professional, minimal details">Icon/Symbol Style</option>
+          <option value="diagram style with labels, educational poster">Labeled Diagram</option>
+          <option value="friendly cartoon style, approachable, child-friendly">Friendly Cartoon</option>
+        </optgroup>
+        <optgroup label="General Styles">
+          <option value="photorealistic, detailed, natural lighting">Photorealistic</option>
+          <option value="flat design, bold colors, geometric shapes">Flat Design</option>
+          <option value="3D render, soft lighting, polished">3D Rendered</option>
+          <option value="anime style, expressive features">Anime/Manga</option>
+        </optgroup>
+      </select>
+      <span class="form-hint">Choose an art style to add to your prompt</span>
+    </div>
+
     <!-- Prompt -->
     <div class="form-group">
       <label for="prompt">Prompt</label>
@@ -66,9 +125,13 @@
         v-model="settings.prompt"
         :maxlength="promptLimit"
         rows="5"
-        placeholder="Describe the image you want to generate..."
+        :placeholder="getPromptPlaceholder()"
       ></textarea>
       <span class="char-count">{{ settings.prompt.length }}/{{ promptLimit }}</span>
+      <div v-if="selectedCategory || selectedStyle" class="prompt-preview">
+        <strong>Full prompt will be:</strong>
+        <p>{{ getFullPrompt() }}</p>
+      </div>
     </div>
 
     <!-- Size -->
@@ -211,6 +274,9 @@ const showPresets = ref(false);
 const showSavePreset = ref(false);
 const showEditPreset = ref(false);
 const editingPreset = ref(null);
+
+const selectedCategory = ref('');
+const selectedStyle = ref('');
 
 const settings = ref({
   model: 'dall-e-3',
@@ -384,10 +450,63 @@ function updateModelOptions() {
   clearError();
 }
 
+function getPromptPlaceholder() {
+  if (selectedCategory.value && selectedStyle.value) {
+    return 'Describe your image... (Category and style will be added automatically)';
+  } else if (selectedCategory.value) {
+    return 'Describe your image... (Category context will be added)';
+  } else if (selectedStyle.value) {
+    return 'Describe your image... (Art style will be added)';
+  }
+  return 'Describe the image you want to generate...';
+}
+
+function getFullPrompt() {
+  let prompt = settings.value.prompt.trim();
+
+  if (!prompt) {
+    return 'Enter your prompt above to see the full prompt with style additions';
+  }
+
+  const additions = [];
+
+  if (selectedStyle.value) {
+    additions.push(selectedStyle.value);
+  }
+
+  if (selectedCategory.value) {
+    const categoryContext = {
+      'Visual Schedule': 'suitable for visual schedule, clear and simple',
+      'Emotion Cards': 'suitable for emotion teaching, expressive and clear',
+      'Social Stories': 'suitable for social stories, friendly and relatable',
+      'Educational': 'educational and age-appropriate',
+      'Classroom Decor': 'suitable for classroom display, professional and inviting',
+      'Children\'s Book - Characters': 'children\'s book character illustration',
+      'Children\'s Book - Scenes': 'children\'s book scene illustration',
+      'Children\'s Book - Styles': 'children\'s book illustration style'
+    };
+
+    const context = categoryContext[selectedCategory.value] || `suitable for ${selectedCategory.value.toLowerCase()}`;
+    additions.push(context);
+  }
+
+  if (additions.length > 0) {
+    return `${prompt}, ${additions.join(', ')}`;
+  }
+
+  return prompt;
+}
+
 async function generateImage() {
   clearError();
 
-  const result = await generate(settings.value);
+  // Create modified settings with the full prompt including style and category
+  const modifiedSettings = {
+    ...settings.value,
+    prompt: getFullPrompt()
+  };
+
+  const result = await generate(modifiedSettings);
 
   if (result.success) {
     emit('image-generated', result);
@@ -629,5 +748,49 @@ label {
 .info-tips p {
   color: var(--text-primary);
   font-style: italic;
+}
+
+/* Category and Style Selectors */
+.form-group select optgroup {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Prompt Preview */
+.prompt-preview {
+  margin-top: 0.75rem;
+  padding: 1rem;
+  background: rgba(102, 126, 234, 0.08);
+  border-left: 3px solid var(--primary-color);
+  border-radius: 4px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.prompt-preview strong {
+  display: block;
+  color: var(--primary-color);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.prompt-preview p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
