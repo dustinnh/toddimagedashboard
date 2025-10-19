@@ -90,6 +90,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import axios from 'axios';
 import GeneratePanel from './components/GeneratePanel.vue';
 import ImageGallery from './components/ImageGallery.vue';
 import UsageDisplay from './components/UsageDisplay.vue';
@@ -108,6 +109,18 @@ const showSettings = ref(false);
 const showWizard = ref(false);
 
 const { loadSessionStats } = useUsageTracking();
+
+// Load existing images from server
+const loadExistingImages = async () => {
+  try {
+    const response = await axios.get('/api/images');
+    if (response.data.success && response.data.images) {
+      generatedImages.value = response.data.images;
+    }
+  } catch (error) {
+    console.error('Error loading existing images:', error);
+  }
+};
 
 // Check if this is first time user and show wizard
 onMounted(() => {
@@ -130,6 +143,7 @@ onMounted(() => {
 
 onMounted(async () => {
   await refreshStats();
+  await loadExistingImages();
 });
 
 const handleImageGenerated = (result) => {

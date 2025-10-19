@@ -14,6 +14,7 @@ const generateRoutes = require('./routes/generate');
 const editRoutes = require('./routes/edit');
 const presetRoutes = require('./routes/presets');
 const usageRoutes = require('./routes/usage');
+const imagesRoutes = require('./routes/images');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -53,6 +54,7 @@ app.use('/api/generate', generateRoutes);
 app.use('/api/edit', editRoutes);
 app.use('/api/presets', presetRoutes);
 app.use('/api/usage', usageRoutes);
+app.use('/api/images', imagesRoutes);
 
 // Category icons endpoint
 app.get('/api/category-icons', (req, res) => {

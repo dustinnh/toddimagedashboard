@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "id": "1760898305913-w13nfqae7",
+    "timestamp": "2025-10-19T18:25:05.913Z",
+    "model": "dall-e-2",
+    "operation": "generation",
+    "size": "256x256",
+    "quality": "standard",
+    "style": null,
+    "n": 1,
+    "cost": 0.016,
+    "prompt_preview": "A cat, friendly cartoon style, approachable, child-friendly, suitable for life skills",
+    "preset_name": null,
+    "success": 1,
+    "error_message": null
+  },
+  {
+    "id": "1760898614450-z06iltfbv",
+    "timestamp": "2025-10-19T18:30:14.450Z",
+    "model": "dall-e-3",
+    "operation": "generation",
+    "size": "1024x1024",
+    "quality": "standard",
+    "style": "natural",
+    "n": 1,
+    "cost": 0.04,
+    "prompt_preview": "Making new friends on your first day of class, charming hand-drawn sketch, pencil-like texture, warm feel, suitable for social stories, friendly and relatable",
+    "preset_name": null,
+    "success": 1,
+    "error_message": null
+  },
+  {
+    "id": "1760898874870-g3g41n2jr",
+    "timestamp": "2025-10-19T18:34:34.870Z",
+    "model": "dall-e-3",
+    "operation": "generation",
+    "size": "1024x1024",
+    "quality": "standard",
+    "style": null,
+    "n": 0,
+    "cost": 0,
+    "prompt_preview": "Circle story time in a grade school setting with all of the students sitting on the ground in a circle looking at the teacher except for one student frontal view smiling being naughty sticking his ton",
+    "preset_name": null,
+    "success": 0,
+    "error_message": "Your request was rejected as a result of our safety system. Image descriptions generated from your prompt may contain text that is not allowed by our safety system. If you believe this was done in error, your request may succeed if retried, or by adjusting your prompt."
+  },
+  {
+    "id": "1760898932280-rkjhhn3w8",
+    "timestamp": "2025-10-19T18:35:32.280Z",
+    "model": "dall-e-3",
+    "operation": "generation",
+    "size": "1024x1024",
+    "quality": "standard",
+    "style": "vivid",
+    "n": 1,
+    "cost": 0.04,
+    "prompt_preview": "Circle story time in a grade school setting with all of the students sitting on the ground in a circle looking at the teacher except for one student frontal view making faces while the teacher has a f",
+    "preset_name": null,
+    "success": 1,
+    "error_message": null
+  }
+]
