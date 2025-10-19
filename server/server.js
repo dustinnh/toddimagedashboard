@@ -54,6 +54,21 @@ app.use('/api/edit', editRoutes);
 app.use('/api/presets', presetRoutes);
 app.use('/api/usage', usageRoutes);
 
+// Category icons endpoint
+app.get('/api/category-icons', (req, res) => {
+  try {
+    const iconsPath = path.join(__dirname, '../data/category-icons.json');
+    if (!fs.existsSync(iconsPath)) {
+      return res.json({ categoryIcons: {} });
+    }
+    const data = fs.readFileSync(iconsPath, 'utf-8');
+    res.json(JSON.parse(data));
+  } catch (error) {
+    console.error('Error loading category icons:', error);
+    res.status(500).json({ success: false, error: 'Failed to load category icons' });
+  }
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({

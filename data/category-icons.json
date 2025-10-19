@@ -1,0 +1,179 @@
+{
+  "categoryIcons": {
+    "Visual Schedule": {
+      "icon": "📅",
+      "color": "#4F46E5",
+      "description": "Daily routines, transitions, and activity sequences"
+    },
+    "Emotion Cards": {
+      "icon": "😊",
+      "color": "#EC4899",
+      "description": "Facial expressions and emotional identification"
+    },
+    "Social Stories": {
+      "icon": "👥",
+      "color": "#8B5CF6",
+      "description": "Social situations and appropriate behaviors"
+    },
+    "Educational": {
+      "icon": "📚",
+      "color": "#10B981",
+      "description": "General learning concepts and educational content"
+    },
+    "Science": {
+      "icon": "🔬",
+      "color": "#06B6D4",
+      "description": "Scientific diagrams, experiments, and nature concepts"
+    },
+    "Math": {
+      "icon": "🔢",
+      "color": "#F59E0B",
+      "description": "Numbers, counting, shapes, and math operations"
+    },
+    "Reading & Literacy": {
+      "icon": "📖",
+      "color": "#EF4444",
+      "description": "Letters, phonics, sight words, and vocabulary"
+    },
+    "Rewards & Motivation": {
+      "icon": "⭐",
+      "color": "#F59E0B",
+      "description": "Achievement badges, certificates, and rewards"
+    },
+    "Calming & Coping": {
+      "icon": "🧘",
+      "color": "#14B8A6",
+      "description": "Self-regulation, breathing, and calming strategies"
+    },
+    "Life Skills": {
+      "icon": "🛠️",
+      "color": "#6366F1",
+      "description": "Daily living skills and independence training"
+    },
+    "Safety & Rules": {
+      "icon": "⚠️",
+      "color": "#DC2626",
+      "description": "Safety procedures and classroom expectations"
+    },
+    "Calendar & Weather": {
+      "icon": "🌤️",
+      "color": "#3B82F6",
+      "description": "Days, months, seasons, and weather conditions"
+    },
+    "Sensory Activities": {
+      "icon": "🎨",
+      "color": "#EC4899",
+      "description": "Sensory exploration and hands-on activities"
+    },
+    "Choice Boards": {
+      "icon": "✅",
+      "color": "#8B5CF6",
+      "description": "Activity choices and first-then visuals"
+    },
+    "Character & People": {
+      "icon": "👤",
+      "color": "#F97316",
+      "description": "Diverse characters and community helpers"
+    },
+    "Classroom Decor": {
+      "icon": "🎯",
+      "color": "#A855F7",
+      "description": "Bulletin boards, labels, and classroom displays"
+    },
+    "Children's Book - Characters": {
+      "icon": "🦊",
+      "color": "#F43F5E",
+      "description": "Story characters in various illustration styles"
+    },
+    "Children's Book - Scenes": {
+      "icon": "🏞️",
+      "color": "#0EA5E9",
+      "description": "Story backgrounds and settings"
+    },
+    "Children's Book - Styles": {
+      "icon": "🎭",
+      "color": "#D946EF",
+      "description": "Different illustration techniques and styles"
+    },
+    "Communication & AAC": {
+      "icon": "💬",
+      "color": "#10B981",
+      "description": "Communication boards, core vocabulary, and AAC symbols"
+    },
+    "Fine Motor Skills": {
+      "icon": "✂️",
+      "color": "#F59E0B",
+      "description": "Tracing, cutting, writing practice, and hand coordination"
+    },
+    "Gross Motor Skills": {
+      "icon": "🤸",
+      "color": "#06B6D4",
+      "description": "Movement activities, exercises, and body awareness"
+    },
+    "Music & Movement": {
+      "icon": "🎵",
+      "color": "#EC4899",
+      "description": "Songs, rhythm activities, and musical concepts"
+    },
+    "Cooking & Food": {
+      "icon": "🍎",
+      "color": "#EF4444",
+      "description": "Recipes, food groups, nutrition, and kitchen safety"
+    },
+    "Community & Places": {
+      "icon": "🏪",
+      "color": "#8B5CF6",
+      "description": "Community locations, map skills, and navigation"
+    },
+    "Animals & Nature": {
+      "icon": "🐾",
+      "color": "#10B981",
+      "description": "Animal facts, habitats, and natural environment"
+    },
+    "Technology Skills": {
+      "icon": "💻",
+      "color": "#6366F1",
+      "description": "Digital literacy, computer use, and online safety"
+    },
+    "Health & Hygiene": {
+      "icon": "🧼",
+      "color": "#14B8A6",
+      "description": "Personal care, hygiene routines, and health concepts"
+    },
+    "Money & Shopping": {
+      "icon": "💰",
+      "color": "#F59E0B",
+      "description": "Coin recognition, money math, and shopping skills"
+    },
+    "Time & Clocks": {
+      "icon": "⏰",
+      "color": "#3B82F6",
+      "description": "Telling time, schedules, and time management"
+    },
+    "Transportation": {
+      "icon": "🚌",
+      "color": "#F97316",
+      "description": "Vehicles, travel, and transportation safety"
+    },
+    "Emotions & Zones": {
+      "icon": "🌈",
+      "color": "#A855F7",
+      "description": "Zones of regulation and emotional zones"
+    },
+    "Executive Function": {
+      "icon": "🧠",
+      "color": "#8B5CF6",
+      "description": "Planning, organization, and task management"
+    },
+    "Problem Solving": {
+      "icon": "🧩",
+      "color": "#06B6D4",
+      "description": "Critical thinking and solution strategies"
+    },
+    "Friendship & Social Skills": {
+      "icon": "🤝",
+      "color": "#EC4899",
+      "description": "Making friends, conversation, and social interactions"
+    }
+  }
+}

@@ -75,7 +75,7 @@
             <select v-model="selectedCategory" class="filter-select">
               <option value="">All Categories</option>
               <option v-for="cat in availableCategories" :key="cat" :value="cat">
-                {{ cat }}
+                {{ getCategoryInfo(cat).icon }} {{ cat }}
               </option>
             </select>
 
@@ -99,7 +99,11 @@
 
         <div v-if="filteredGroupedPresets && Object.keys(filteredGroupedPresets).length > 0">
           <div v-for="(presets, category) in filteredGroupedPresets" :key="category" class="preset-category">
-            <h3>{{ category }}</h3>
+            <h3 class="category-header" :style="{ borderColor: getCategoryInfo(category).color }">
+              <span class="category-icon">{{ getCategoryInfo(category).icon }}</span>
+              <span class="category-name">{{ category }}</span>
+              <span class="category-count">({{ presets.length }})</span>
+            </h3>
             <div class="preset-list">
               <div
                 v-for="preset in presets"
@@ -183,10 +187,14 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { usePresets } from '../composables/usePresets';
+import axios from 'axios';
 
 const emit = defineEmits(['close', 'load', 'edit', 'duplicate']);
 
 const { presets, loading, error, loadPresets, deletePreset, incrementUsage, savePreset } = usePresets();
+
+// Category icons data
+const categoryIcons = ref({});
 
 // Filter and search state
 const searchQuery = ref('');
@@ -231,8 +239,29 @@ function handleKeyDown(event) {
   }
 }
 
+// Load category icons
+async function loadCategoryIcons() {
+  try {
+    const response = await axios.get('/api/category-icons');
+    categoryIcons.value = response.data.categoryIcons || {};
+  } catch (err) {
+    console.warn('Could not load category icons:', err);
+    categoryIcons.value = {};
+  }
+}
+
+// Get category info (icon, color, description)
+const getCategoryInfo = (categoryName) => {
+  return categoryIcons.value[categoryName] || {
+    icon: '📁',
+    color: '#6B7280',
+    description: categoryName
+  };
+};
+
 onMounted(async () => {
   await loadPresets();
+  await loadCategoryIcons();
   window.addEventListener('keydown', handleKeyDown);
 });
 
@@ -541,11 +570,32 @@ async function importPresets(event) {
 }
 
 .preset-category h3 {
-  color: var(--primary-color);
+  color: var(--text-primary);
   font-size: 1.125rem;
   margin-bottom: 0.75rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid var(--primary-color);
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.category-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.category-name {
+  font-weight: 600;
+}
+
+.category-count {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text-secondary);
 }
 
 .preset-list {
